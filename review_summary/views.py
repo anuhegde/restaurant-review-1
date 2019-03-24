@@ -1,7 +1,9 @@
 from django.shortcuts import render, get_object_or_404
+from django.core.paginator import Paginator
+from django.db.models import Q
 # Create your views here.
 from tablib import Dataset
-from .models import Restaurant
+from .models import Restaurant, Review
 
 
 
@@ -19,11 +21,31 @@ def simple_upload(request):
 
     return render(request, 'core/simple_upload.html')
 
+def index_page(request):
+    return render(request, 'restaurant/intro.html', {})
+
+def get_restaurants(request):
+    query = request.GET.get('search')
+    locality = request.GET.get('locality')
+
+    # , restaurantLocation=locality
+    if locality == None:
+        rest = Restaurant.objects.filter(restaurantCity__icontains=query)
+    else:
+        rest = Restaurant.objects.filter(restaurantCity__icontains=query, restaurantLocation__icontains=locality)
+
+    paginator = Paginator(rest, 25) # Show 25 contacts per page
+    page = request.GET.get('page')
+    rest = paginator.get_page(page)
+    return render(request, 'restaurant/restaurant.html', {'restaurants': rest, 'query': query})
+
+
 def restaurant_list(request):
     rest = Restaurant.objects.all()
     return render(request, 'restaurant/restaurants.html', {'restaurants': rest})
 
 def restaurant_detail(request, id):
     rest = get_object_or_404(Restaurant, id=id)
+    review = Review.objects.filter(rest_id=id)
     # rest = Restaurant.objects.all()
-    return render(request, 'restaurant/restaurant_detail.html', {'restaurant': rest})
+    return render(request, 'restaurant/restaurant_detail.html', {'restaurant': rest, 'reviews': review})
