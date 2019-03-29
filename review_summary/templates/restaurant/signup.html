@@ -1,40 +1,50 @@
-<html>
-    <head>
-        <title>PocketDoctor-Signup</title>
-        <link rel="stylesheet" type="text/css" href="Signup.css">
+{% load static %}
 
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<html lang="en">
 
-        <link href="https://fonts.googleapis.com/css?family=Carter+One" rel="stylesheet">
-    </head>
-    <body>
-        <div class="card">
-            <div class="logo">
-                <i class="fas fa-hamburger"></i>
-                <span>RESTO</span>
-            </div>
-            <form>
-                <div class="form-group">
-                    <label for="Phone">Contact No:</label>
-                    <input type="text" class="form-control" id="phone" placeholder="Enter Contact No." name="Contact">
-                </div>
-                <div>
-                    <label for="name">Name:</label>
-                    <input type="text" class="form-control" id="name" placeholder="Enter Name" name="Name">
-                </div> &nbsp;
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
-                </div>
-                <div class="form-group">
-                    <label for="pwd">Password:</label>
-                    <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd">
-                </div><br>
-                <button type="submit" class="btn btn-primary">Submit</button>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Resto</title>
 
-                <span>Already signed up? <a href="Login.html">Login</a></span>
-            </form>
-        </div>
-    </body>
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/signin.css' %}" rel="stylesheet">
+    <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet">
+</head>
+
+<body class="text-center">
+    <form class="form-signin" action="{% url 'restaurant:user_register' %}" method="post">
+        {% csrf_token %}
+        <i style="font-size: 32px;" class="fas fa-hamburger"></i>
+        <h1 class="h3 mb-3 font-weight-normal">Register</h1>
+
+        {% if error_message %}
+        <p class="bg-danger" style="color: white;">{{ error_message }}</p>
+        {% endif %}
+
+        <!-- <label for="inputEmail" class="sr-only">Email address</label>
+        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required> -->
+        {{ form.username }}
+
+        {{ form.email }}
+
+        {{ form.password }}
+
+        {{ form.password_repeat }}
+
+        {{ form.first_name }}
+
+        {{ form.last_name }}
+
+        {{ form.phone_number }}
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+    </form>
+</body>
+
 </html>

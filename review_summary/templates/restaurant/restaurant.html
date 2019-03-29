@@ -61,7 +61,7 @@
 
 
 
-				<div class="bd-example">
+				{% comment %} <div class="bd-example">
 					<div class="btn-group">
 						<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
 							aria-expanded="false">Cuisine</button>
@@ -97,6 +97,57 @@
 							<a class="dropdown-item" href="#">Separated link</a>
 						</div>
 					</div><!-- /btn-group -->
+				</div> {% endcomment %}
+
+				<div class="dropdown">
+					<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Cuisine
+						<span class="caret"></span></button>
+					<ul class="dropdown-menu dropdown-menu-center">
+						<li><a href="#">American</a></li>
+						<li><a href="#">Asian</a></li>
+						<li><a href="#">BBQ</a></li>
+						<li><a href="#">Biryani</a></li>
+						<li><a href="#">Burger</a></li>
+						<li><a href="#">Chinese</a></li>
+						<li><a href="#">Continental</a></li>
+						<li><a href="#">Desserts</a></li>
+						<li><a href="#">Healthy</a></li>
+						<li><a href="#">Ice Cream</a></li>
+						<li><a href="#">Indian</a></li>
+						<li><a href="#">Juice</a></li>
+						<li><a href="#">Mexican</a></li>
+						<li><a href="#">Middle East</a></li>
+						<li><a href="#">North Indian</a></li>
+						<li><a href="#">South Indian</a></li>
+						<li><a href="#">Street Food</a></li>
+						<li><a href="#">Thali</a></li>
+						<li><a href="#">Sushi</a></li>
+						<li><a href="#">Vegetarian</a></li>
+					</ul>
+				</div>
+
+				<div class="dropdown">
+					<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Restaurant Type
+						<span class="caret"></span></button>
+					<ul class="dropdown-menu dropdown-menu-center">
+						<li><a href="#">Fast</a></li>
+						<li><a href="#">Bar</a></li>
+						<li><a href="#">Cafe</a></li>
+						<li><a href="#">Buffet</a></li>
+						<li><a href="#">Indian</a></li>
+					</ul>
+				</div>
+
+				<div class="dropdown">
+					<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Pricing
+						<span class="caret"></span></button>
+					<ul class="dropdown-menu dropdown-menu-center">
+						<li><a href="#">500</a></li>
+						<li><a href="#">1000</a></li>
+						<li><a href="#">1500</a></li>
+						<li><a href="#">2000</a></li>
+						<li><a href="#">2500</a></li>
+					</ul>
 				</div>
 
 				<form autocomplete="off" action="/restaurants">
@@ -127,7 +178,8 @@
 							<img class="card-img-top" src="{{ restaurant.restaurantImage }}" alt="{{ restaurant.restaurantName }}">
 							<div class="card-body">
 								<h4 class="card-text"><a
-										href="{% url 'restaurant_detail' id=restaurant.id %}">{{ restaurant.restaurantName }}</a></h4>
+										href="{% url 'restaurant:restaurant_detail' id=restaurant.id %}">{{ restaurant.restaurantName }}</a>
+								</h4>
 								<p class="card-text">{{ restaurant.restaurantCusine }}</p>
 
 								<div class="d-flex justify-content-between align-items-center">
@@ -139,7 +191,7 @@
 									</div>
 									<small class="text-muted">9 mins</small>
 								</div>
-								<a href="{% url 'restaurant_detail' id=restaurant.id %}" class="btn btn-primary btn-block"
+								<a href="{% url 'restaurant:restaurant_detail' id=restaurant.id %}" class="btn btn-primary btn-block"
 									style="color: white; cursor: pointer; margin-top: 10px;">See More</a>
 
 							</div>
