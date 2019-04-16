@@ -35,12 +35,21 @@ def index_page(request):
 def get_restaurants(request):
     query = request.GET.get('search')
     locality = request.GET.get('locality')
+    cost = request.GET.get('costForTwo')
+    cuisine = request.GET.get('cuisine')
 
     # , restaurantLocation=locality
-    if locality == None:
-        rest = Restaurant.objects.filter(restaurantCity__icontains=query)
-    else:
-        rest = Restaurant.objects.filter(restaurantCity__icontains=query, restaurantLocation__icontains=locality)
+    # if locality == None:
+    #     rest = Restaurant.objects.filter(restaurantCity__icontains=query, )
+    # elif cost == None:
+
+    # elif cuisine = None:
+
+    # else:
+    #     rest = Restaurant.objects.filter(restaurantCity__icontains=query, restaurantLocation__icontains=locality)
+
+    rest = Restaurant.objects.filter(restaurantCity__icontains=query or '', restaurantLocation__icontains=locality or '', 
+                                     restaurantCostForTwo__gte=cost or 9999, restaurantCusine__icontains=cuisine or '')
 
     paginator = Paginator(rest, 25) # Show 25 contacts per page
     page = request.GET.get('page')

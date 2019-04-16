@@ -12,11 +12,11 @@ class Restaurant(models.Model):
     restaurantLocation = models.CharField(max_length=50)
     restaurantCity = models.CharField(max_length=10)
     restaurantCusine = models.CharField(max_length=10)
-    restaurantCostForTwo = models.CharField(max_length=10)
-    restaurantRating = models.CharField(max_length=10)
+    restaurantCostForTwo = models.IntegerField()
+    restaurantRating = models.IntegerField()
     restaurantRatingText = 	models.CharField(max_length=100)
-    restaurantRatingColor	= models.CharField(max_length=10)
-    restaurantRatingVotes	= models.CharField(max_length=10)
+    restaurantRatingColor = models.CharField(max_length=10)
+    restaurantRatingVotes = models.IntegerField()
     restaurantImage = models.URLField()
 
     def __str__(self):
